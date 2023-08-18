@@ -30,6 +30,8 @@ library(scGEM)
 data("pbmc3k.final")
 set.seed(111)
 X <- pbmc3k.final@assays$RNA@counts
+# you can use raw count/log2/or other normalized data for the input
+# just make it non-negative and no NAs in the sparse matrix
 X@x <- log2(X@x + 1) # log-transform the count data
 
 # for binary learning
