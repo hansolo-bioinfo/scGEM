@@ -146,7 +146,3 @@ barplot(gem_over_cell[, 100], ylab = "weight", xlab = "GEM",
 ```
 
 <img width="673" alt="Screenshot 2023-08-18 at 12 31 24" src="https://github.com/hansolo-bioinfo/scGEM/assets/65295899/adced07b-67a8-47bd-90db-46492ebfad6e">
-
-
-```R
-
