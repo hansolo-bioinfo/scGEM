@@ -1,0 +1,11 @@
+Package: scGEM
+Type: Package
+Title: A test R package
+Version: 0.1.1
+Author: Han Zhang
+Maintainer: The package maintainer <yourself@somewhere.net>
+Description: More about what it does (maybe more than one line)
+    Use four spaces when indenting paragraphs within the Description.
+License: What license is it under?
+Encoding: UTF-8
+LazyData: true
