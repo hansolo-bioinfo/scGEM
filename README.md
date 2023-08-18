@@ -1,6 +1,6 @@
 # scGEM
 
-scGEM is a nested tree-structured generative model that identifies subtype-specific and -shared GEMs via scRNAseq data.
+scGEM is a nested tree-structured generative model that identifies subtype-specific and -shared gene coexpressing modules (GEMs) via scRNAseq data.
 
 ## Installation
 
@@ -48,7 +48,7 @@ scGEM_init <- initTree(
 
 ### 3) learning
 
-For one-batch training, please set the `batch_size` equals to the sample size.
+For one-batch training, please set the `batch_size` equals to the sample size:
 
 ```R
 # one-batch
@@ -68,10 +68,10 @@ scGEM_trained <- minibatchInfer(
 )
 ```
 
-For mini-batch training, please do
+For mini-batch training, please do:
 
-# mini-batch
 ```R
+# mini-batch
 scGEM_trained_mb <- minibatchInfer(
     X,
     scGEM_init,
@@ -90,6 +90,8 @@ scGEM_trained_mb <- minibatchInfer(
 
 ### 4) plot likelihood
 
+Compare the total likelihood during each epoch in one-batch and mini-batch modes.
+
 ```R
 # total likelihood
 plot(scGEM_trained$likelihood, col = "blue", type = "b",
@@ -98,3 +100,51 @@ points(scGEM_trained_mb$likelihood, col = "red", type = "b")
 legend("bottomright", legend = c("One-batch", "Mini-batch"),
        lty = 1, col = c("blue", "red"))
 ```
+
+<img width="479" alt="Screenshot 2023-08-18 at 10 57 25" src="https://github.com/hansolo-bioinfo/scGEM/assets/65295899/334c3181-cb3b-4e41-a492-43ad2ef57312">
+
+### 5) extract distributions
+
+To get the raw values:
+
+```R
+gene_over_gem <- scGEM_trained_mb$centroids       # 10640 x 85
+gem_over_cell <- scGEM_trained_mb$count_matrix    # 85 x 2638
+tree_relation <- scGEM_trained_mb$tree            # 86 x 2
+gene_name     <- scGEM_trained_mb$gene
+cell_name     <- scGEM_trained_mb$cell
+gem_name      <- paste0("GEM", 1:85)
+
+rownames(gene_over_gem) <- gene_name
+colnames(gene_over_gem) <- gem_name
+rownames(gem_over_cell) <- gem_name
+colnames(gem_over_cell) <- cell_name
+```
+
+To get a relative proportion like in other topic models:
+
+```R
+gene_over_gem <- apply(gene_over_gem, 2, function(x) x/sum(x))
+gem_over_cell <- apply(gem_over_cell, 2, function(x) x/sum(x))
+```
+
+Plot gene distribution for GEM 1
+
+```R
+barplot(sort(gene_over_gem[, 1], decreasing = T), ylab = "weight", xlab = "gene", main = "GEM 1")
+```
+
+<img width="643" alt="Screenshot 2023-08-18 at 12 28 38" src="https://github.com/hansolo-bioinfo/scGEM/assets/65295899/a191f3a2-ac96-4fbd-a91c-a5d9ace66aaa">
+
+Plot GEM distribution for the 100th cell
+
+```R
+barplot(gem_over_cell[, 100], ylab = "weight", xlab = "GEM", 
+        main = "100th cell: AAGATTACCGCCTT")
+```
+
+<img width="673" alt="Screenshot 2023-08-18 at 12 31 24" src="https://github.com/hansolo-bioinfo/scGEM/assets/65295899/adced07b-67a8-47bd-90db-46492ebfad6e">
+
+
+```R
+
