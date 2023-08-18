@@ -45,9 +45,8 @@ initTree <- function(
     }
 
     if (rm.housekeeping_genes) {
-        hk <- read.table("data/Housekeeping_GenesHuman.csv",
-                         sep = ";", head = TRUE)
-        hk <- hk$Gene.name
+        data("Housekeeping_GenesHuman")
+        hk <- as.character(Housekeeping_GenesHuman$Gene.name)
         rm_hk <- which(rownames(x) %in% hk)
         x <- x[-rm_hk, ]
     }
