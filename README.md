@@ -68,7 +68,7 @@ scGEM_trained <- minibatchInfer(
 )
 ```
 
-For mini-batch training, please do:
+For mini-batch training (recommended), please do:
 
 ```R
 # mini-batch
