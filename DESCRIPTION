@@ -1,7 +1,7 @@
 Package: scGEM
 Type: Package
 Title: scGEM: unveiling the nested tree-structured gene co-expressing modules in single cell transcriptome data
-Version: 0.1.1
+Version: 0.1.2
 Author: Han Zhang, Xinghua Lu, Binfeng Lu, Lujia Chen
 Maintainer: Han Zhang <haz96@pitt.edu>
 Description: More about what it does (maybe more than one line)
