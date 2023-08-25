@@ -35,7 +35,7 @@ X <- pbmc3k.final@assays$RNA@counts
 X@x <- log2(X@x + 1) # log-transform the count data
 
 # for binary learning
-# X@x <- ifelse(X@x > 0, 1)
+# X@x <- ifelse(X@x > 0, 1, 0)
 ```
 
 ### 2) initialization
