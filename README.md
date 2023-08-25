@@ -1,10 +1,10 @@
 # scGEM
 
-scGEM is a nested tree-structured generative model that identifies subtype-specific and -shared gene coexpressing modules (GEMs) via scRNAseq data.
+scGEM is a nested tree-structured generative model that identifies subtype-specific and -shared gene coexpressing modules (GEMs) in scRNAseq data.
 
 ## Installation
 
-Currently, scGEM works on MAC/Linux. For faster implementation on MAC, you need to switch your built-in BLAS library to Apple's vecLib. (https://mpopov.com/blog/2021/10/10/even-faster-matrix-math-in-r-on-macos-with-m1/). 
+Currently, scGEM works on MAC/Linux. For faster implementation on M1 or M2 MAC, you need to switch your built-in BLAS library to Apple's vecLib. (https://mpopov.com/blog/2021/10/10/even-faster-matrix-math-in-r-on-macos-with-m1/). 
 
 ```R
 devtools::install_github("hansolo-bioinfo/scGEM")
