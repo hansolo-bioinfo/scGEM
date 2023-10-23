@@ -41,14 +41,18 @@ initTree <- function(
 
     if (! is.null(blacklist_genes)) {
         rm_genes <- grep(blacklist_genes, rownames(x))
-        x <- x[-rm_genes, ]
+        if (length(rm_genes) > 0) {
+            x <- x[-rm_genes, ]
+        }
     }
 
     if (rm.housekeeping_genes) {
         data("Housekeeping_GenesHuman")
         hk <- as.character(Housekeeping_GenesHuman$Gene.name)
         rm_hk <- which(rownames(x) %in% hk)
-        x <- x[-rm_hk, ]
+        if (length(rm_hk) > 0) {
+            x <- x[-rm_hk, ]
+        }
     }
 
     # normalize
